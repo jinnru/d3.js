@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>綁定資料到多個視覺元素</title>
+	<script src="https://d3js.org/d3.v3.js"></script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+
+	<script>
+	
+		var arr = [85, 60, 99, 49, 77, 82]; 
+		
+		
+				d3.select("body")             // 回傳body 
+					 .selectAll("div")        // 回傳body>div 
+					 .data(arr)               // 回傳body>div
+					 .text(function(d)        // 回傳body>div
+						   {
+						   		return d;  
+						   });              
+		
+		  console.log(d3.selectAll("div"));    //  F12 /Console
+
+	</script>
+</body>
+</html>

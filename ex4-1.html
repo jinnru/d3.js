@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>使用SVG語法畫音符</title>
+	<script src="https://d3js.org/d3.v3.js"></script>
+  
+</head>
+<body>
+
+  <svg width="300" height="200"> 
+     <!--  <circle width="150" height="120" r="15"></circle>
+          <rect x="160" y="45" width="5" height="78"></rect>  -->
+	</svg>
+  
+  
+  <script>
+    d3.select("svg")
+      .append("circle")
+      .attr({
+        "cx":150,
+        "cy":120,
+        "r":15
+    });
+    
+    d3.select("svg")
+      .append("rect")
+      .attr({
+        "x":160,
+        "y":45,
+        "width":5,
+        "height":78
+    });
+    
+  
+  </script>
+</body>
+</html>

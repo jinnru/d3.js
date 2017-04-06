@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>建立簡單長條圖表-利用ordinal() 秀出各政黨顏色</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<script>
+	var index = ["中國國民黨", "民主進步黨", "時代力量", "無黨團結聯聯盟", "親民黨"];
+	var color = ['blue', 'green', 'yellow', 'gray', 'orange'];
+	var xScale = d3.scale.ordinal()
+		.domain(index)
+		.range(color);
+
+	//  F12 /Console
+	
+	console.log(xScale("中國國民黨"));        //blue
+	console.log(xScale("民主進步黨"));        //green
+	console.log(xScale("時代力量"));          //yellow
+	console.log(xScale("無黨團結聯聯盟"));     //gray
+	console.log(xScale("親民黨"));           //orange
+	console.log(xScale("新黨"));             //blue...out of array index，輸出陣列第1個元素值
+
+</script>
+
+<body>
+
+
+</body>
+
+</html>

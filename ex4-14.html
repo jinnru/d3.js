@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>最簡單的資料集-自建資料-讓低於60的數值顯示為紅色，70~80顯示為藍色</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  
+</head>
+<body>
+  <script>
+    var arr=[85,60,99,49,77,32,59];
+    
+    var body=d3.select("body");
+    
+    for(var i=0; i<arr.length; i++)
+      {
+       if(arr[i] < 60)
+        {
+            body.append("div").text(arr[i]).style({"color": "red"});   
+        }
+        else if(arr[i] >= 60 && arr[i] < 80)
+        {
+            body.append("div").text(arr[i]).style({"color": "blue"});
+        } 
+         else
+        {
+            body.append("div").text(arr[i]);
+        } 
+      }    
+    
+  </script>
+  
+</body>
+</html>

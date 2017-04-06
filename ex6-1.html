@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>建立簡單長條圖表</title>
+	<script src="https://d3js.org/d3.v3.js"></script>
+</head>
+<body>
+	<script>
+	
+		var arr = [85, 60, 99, 49, 77, 82]; 
+		var w=600;
+		var h=400;
+		var p=100;
+		
+		svg();
+		bind(arr);     
+		render();
+		
+		function svg(){
+			d3.select("body")
+				.append("svg")
+				.attr({
+					"width":w,
+					"height":h
+			})
+			
+		}
+		
+		function bind(data)
+		{    
+			//狀態1
+			var selection = d3.select("svg")                          
+							  .selectAll("rect")                          
+							  .data(data);   
+			
+			//狀態2
+			selection.enter().append("rect");  
+			
+			//狀態3
+			selection.exit().remove();   
+			
+			
+			var selection_text = d3.select("svg")                          
+							  .selectAll("text")                          
+							  .data(data);   
+			
+			//狀態2
+			selection.enter().append("text");  
+			
+			//狀態3
+			selection.exit().remove();     
+			
+		} 
+		
+		//render
+		function render()
+		{         
+			d3.selectAll("rect")
+			  .attr({
+				"x":function(d,i){
+					return p+43*i
+				},
+				"y":function(d){
+						return h-p-d;
+				},
+				"width":40,
+				"height": function(d){
+						return d;
+				},
+				"fill":function(d){
+					if(d<70){
+						return "red";
+					}
+					else{
+						return "lightgreen";
+					}
+				}
+		});
+		
+		d3.selectAll("text")
+			  .attr({
+				"x":function(d,i){
+					return p+43*i+6;
+				},
+				"y":function(d){
+						return h-p+25;
+				},				
+		}).text(function(d){
+			return d;
+		});
+	}
+		
+	</script>
+</body>
+</html>

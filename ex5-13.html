@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>綁定資料到多個視覺元素</title>
+	<script src="https://d3js.org/d3.v3.js"></script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+	<script>
+	
+		var arr = [85, 60, 99, 49, 77, 82]; 
+		
+		//狀態1
+		var selection = d3.select("body")    //資料綁定
+		
+					 .selectAll("div")        
+					 .data(arr)  
+		
+					 selection.text(function(d){   //render：將資料顯示到畫面上
+						 return d;
+					 });
+		
+		//狀態2
+					 selection.enter()
+					 .append("div")      //資料綁定
+					 .text(function(d){
+						 return d;
+					 });
+		
+		//狀態3
+					 selection.exit().remove();
+				
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>動態載入SVG使用法-amount>1000000000</title>
+	<script src="https://d3js.org/d3.v3.js"></script>
+	<svg id="category" width="600" height="400"></svg>
+     <script>
+       d3.json("invoice-taipei.json",function(dataSet){
+           var svg3 = d3.select("#category");
+           var count = 0;
+           for(var i=0; i<dataSet.length; i++){
+                if(dataSet[i].date==="2016/8/1"&&
+                 dataSet[i].cid==="A"&& dataSet[i].amount>1000000000){
+                      d3.select("#category")
+                        .append("rect")
+                        .attr({
+                        x: 250,
+                        y: 10+12*count,
+                        width: dataSet[i].amount/100000000,
+                        height: 10,
+                        fill: "red"
+                      });
+                      d3.select("#category")
+                        .append("text")
+                        .attr({
+                        x: 0,
+                        y: 16+12*count,
+                        "font-size": 12
+                      }).text(dataSet[i].industry);
+                      count++;
+                 }
+                
+            }
+       });
+   </script>
+</head>
+<body>
+	
+</body>
+</html>

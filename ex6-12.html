@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>序數-比例例尺</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<script>
+	var index = [0, 2, 4, 6, 8];
+	var color = ["red", "blue", "green", "yellow", "black"];
+
+
+	var xScale = d3.scale.ordinal()
+		.domain(index)
+		.range(color);
+
+	//  F12 /Console
+	
+	console.log(xScale(6)); //yellow
+	console.log(xScale(0)); //red
+	console.log(xScale(10)); //red...out of array index，輸出陣列第1個元素值
+	console.log(xScale(12)); //red...out of array index，輸出陣列第1個元素值
+
+</script>
+
+<body>
+
+</body>
+
+</html>

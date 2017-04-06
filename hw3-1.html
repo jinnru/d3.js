@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>亂數產生器</title>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+ 	<p id='rec'></p>
+    <input type="button" onclick="launch()" value="啟動">
+
+    <style id="jsbin-css">
+		 #rec
+		 {
+			   border: 2px solid red;
+			   height: 1em;
+			   width: 6em;
+			   padding: .5em;
+		 }
+		
+		 input[type="button"]
+		  {
+			   width: 3em;
+			   font-size: 2em;
+		  }
+	</style>    
+
+	<script>
+		 function launch()
+		 {
+		   d3.select("#rec").text(random(1911,2016));
+		 }
+		
+		 function random(n,m)
+		 {
+		   return Math.ceil(Math.random()*(m-n)+n);
+		 }
+	</script>
+  
+</body>
+</html>

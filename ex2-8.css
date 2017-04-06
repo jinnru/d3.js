@@ -1,0 +1,18 @@
+/* CSS（Cascading Style Sheets ，共用樣式表）*/
+h1{
+		color:#019BD9;
+	}
+	ul{
+		list-style-type: decimal;
+		line-height:30px;
+		color:#848484;
+		font-style:italic;
+		font-weight:700;	
+	}
+	div{
+		background: rgba(209, 214, 216, 0.29);
+		padding:5px 20px;
+		margin:-10px;
+		font-family:"Times New Roman";
+	
+	}
