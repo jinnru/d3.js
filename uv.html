@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紫外線即時監測資料 (with Google Map)</title>
+    <style>
+      #legend {padding:0px 5px;
+               border:1px solid black;      
+               width:fit-content;
+               width:-moz-fit-content}
+      span {font-style:bold; margin:5px}
+    </style>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+		
+		// 紫外線資料網址
+		url='http://opendata.epa.gov.tw/ws/Data/UV/?format=json';
+		var mymap; // 地圖物件     
+		var thedata;
+		$(function(){        
+			// 建立地圖
+			mymap = new google.maps.Map($('#uvmap').get(0), {
+					zoom: 8,
+					center: {lat:23.64, lng:120.20}
+			});
+
+			// 用 JSONP 取得資料
+			$.ajax({url:url,
+					dataType:'jsonp',
+					success: buildMarkers,  // 成功時呼叫自訂函式 buildMarkers
+					error  : function(x){
+						 console.log('錯誤, 代碼:'+x.status);
+					}
+			});
+		});
+
+		// AJAX 要求成功時執行的函式 
+		function buildMarkers(data){  
+		  if (data == null) {
+			 alert("下載失敗!");
+			 return;
+		  }
+		  thedata=data;
+		  // 逐筆處理陣列中的資料
+		  $.each(data, function(index){
+			// 呼叫自訂函式, 將 "度,分,秒" 格式的經緯度字串
+			// 轉換成經緯度值, 並建立成經緯度物件          
+			var latlng = {lat: convertWGS84StrToFloat(this.WGS84Lat),
+						  lng: convertWGS84StrToFloat(this.WGS84Lon)}
+
+			var uvi = parseInt(this.UVI);  // 將 UV 指數轉成整數
+			if (uvi > 9)  uvi = 9;         // 若 UV 指數大於 9, 就設為 9
+			else if(isNaN(uvi)) uvi=0;     // 若沒資料或非數字, 就設為 0
+
+			// 建立 Marker 物件
+			var marker = new google.maps.Marker({
+				   position: latlng, // 標記的位置
+				   map: mymap,            // 標記要放的地圖
+				   title: this.SiteName+','+this.County+',紫外線指數'+this.UVI,      // 滑鼠移到標記上面時顯示的文字 
+				   label: uvi.toString(),  // 將 UV 指數數值轉回字串
+				   icon:'http://maps.google.com/mapfiles/kml/shapes/sunny.png'
+			}); 
+		  }); 
+		}
+
+		function convertWGS84StrToFloat(str){
+		  // 解析經緯度字串
+		  var arr= str.split(','); //依逗號分割字串, 轉成字串陣列
+
+		  return parseFloat(arr[0]) +      // 度
+				 parseFloat(arr[1])/60 +   // 分
+				 parseFloat(arr[2])/3600;  // 秒
+		}
+    </script>
+  </head>
+  <body>
+    <h3>紫外線即時監測資料 (with Google Map)</h3>
+    <div id="uvmap" style="width:720px;height:800px"></div>
+  </body>
+</html>
